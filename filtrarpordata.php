@@ -190,71 +190,81 @@ $mostrar = new MOVS;
 								<!--  SALDO ANTERIOR  BALANÇO MENSAL -->
 								<div class="row" >
 									<div class="col-sm-12" style="text-align: left; border-bottom: 1px dashed #f00;" >
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">BALANCO MENSAL</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">BALANCO MENSAL</span></strong></font>
 									</div>
 								</div>
 								<div class="row" >
 									<div class="col-sm-6" style="text-align: left;" >
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">Saldo Anterior:</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">Saldo Anterior:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right;">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-size:14px; color:<?php echo "#006400" ?>">
 												<?php echo formata_dinheiro($saldoanterior) ?>
 											</span>
-										</strong>	
+										</strong>
+									</font>	
 									</div>
 								</div>
 									<!--  ENTRADAS BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style="text-align: left;">
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#0000FF" ?>">Entradas:</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#0000FF" ?>">Entradas:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style=" text-align: right;">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#0000FF" ?>">
 												<?php echo formata_dinheiro($entradas_per) ?>
 											</span>
 										</strong>
+									</font>
 									</div>
 								</div>
 								<!--  SAIDAS BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style=" text-align: left; ">
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#C00" ?>">Saidas:</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#C00" ?>">Saidas:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right; ">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-size:14px; color:<?php echo "#C00" ?>">
 												<?php echo formata_dinheiro($saidas_per) ?>
 											</span>
 										</strong>
+									</font>
 									</div>
 								</div>
 								<!--  BALANÇO BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00;">
-										<strong><span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">Balanco no Mes:</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">Balanco no Mes:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right; border-bottom: 1px dashed #f00;">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">
 												<?php echo formata_dinheiro($bal) ?>
 											</span>
 										</strong>
+									</font>
 									</div>
 								</div>
 									<!--  SALDO ATUAL BALANÇO MENSAL  -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left;">
-										<strong><span style="font-size:14px; color:<?php echo "#006400" ?>">Saldo Atual:</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#006400" ?>">Saldo Atual:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right;">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">
 												<?php echo formata_dinheiro($saldo_atual) ?>
 											</span>
 										</strong>
+									</font>
 									</div>
 								</div>		
 							</div>
@@ -263,56 +273,58 @@ $mostrar = new MOVS;
 								
 								<div class="row" >
 									<div class="col-sm-12" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00;" >
-										<strong><span style="font-size:14px; color:<?php echo "#006400" ?>">BALANCO ANUAL</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#006400" ?>">BALANCO ANUAL</span></strong></font>
 									</div>
 								</div>
 								<!--  SALDO ANTERIOR  BALANÇO ANUAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left;">
-										<strong><span style="font-size:14px; color:<?php echo "#006400" ?>">Saldo Anterior:</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#006400" ?>">Saldo Anterior:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right;">
-										<strong><span style="font-size:14px; color:<?php echo "#006400" ?>"><?php print formata_dinheiro($saldo_aa) ?></span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#006400" ?>"><?php print formata_dinheiro($saldo_aa) ?></span></strong></font>
 									</div>
 								</div>
 								<!--  ENTRADAS  BALANÇO ANUAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left;">
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#0000FF" ?>">Entradas:</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#0000FF" ?>">Entradas:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right;">
-										<strong><span style="font-size:14px; color:<?php echo "#0000FF" ?>"><?php print formata_dinheiro($ent_acab) ?></span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#0000FF" ?>"><?php print formata_dinheiro($ent_acab) ?></span></strong></font>
 									</div>
 								</div>
 								<!--  SAIDAS BALANÇO ANUAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; ">
-										<strong><span style="font-size:14px; color:<?php echo "#C00" ?>">Saidas:</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#C00" ?>">Saidas:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right; ">
-										<strong><span style="font-size:14px; color:<?php echo "#C00" ?>"><?php print formata_dinheiro($sai_acab) ?></span></strong>	
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php echo "#C00" ?>"><?php print formata_dinheiro($sai_acab) ?></span></strong></font>
 									</div>
 								</div>
 								<!--  BALANÇO BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00;">
-										<strong><span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">Balanco:</span></strong>
+									<font color="black" size="3"><strong><span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">Balanco:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: right; border-bottom: 1px dashed #f00;">
+									<font color="black" size="3">
 										<strong>
 											<span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php if($bal_bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">
 												<?php echo formata_dinheiro($bal_bal) ?>
 											</span>
 										</strong>
+									</font>
 									</div>
 								</div>
 								<!--  SALDO ATUAL BALANÇO ANUAL -->
 								<div class="row">
 									<div class="col-sm-6" style=" text-align: left;">
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">Saldo Atual:</span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>">Saldo Atual:</span></strong></font>
 									</div>
 									<div class="col-sm-6" style=" text-align: right;">
-										<strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>"><?php print formata_dinheiro($saldo_acab) ?></span></strong>
+									<font color="black" size="3"><strong><span style="font-family:courier,arial,helvetica;font-size:14px; color:<?php echo "#006400" ?>"><?php print formata_dinheiro($saldo_acab) ?></span></strong></font>
 									</div>
 								</div>	
 							</div>

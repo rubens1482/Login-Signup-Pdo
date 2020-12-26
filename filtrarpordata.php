@@ -177,7 +177,7 @@ $mostrar = new MOVS;
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="text-align: left;">
 								<font color="black" size="3" style="font-family:courier,arial,helvetica;"><strong>BALANCOS DE MOVIMENTO</strong></font>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="font-family:courier,arial,helvetica;text-align: right;">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="text-align: right;">
 								<font color="black" size="3" style = "font-family:courier,arial,helvetica;"><strong>FILTRAGEM POR DATA</strong></font>
 							</div>
 						</div>	

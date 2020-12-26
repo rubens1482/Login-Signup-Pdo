@@ -124,7 +124,7 @@ function mascara_cpf(cpf)
 </head>
 <body> 
 	<!-- 	INICIO DA NAVBAR PRINCIPAL CONTENDO NOME DO SISTEMA, DATA ATUAL, LOGIN USUARIO, LOGIN CONTA, MENU DE CONTEXTO -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-primary navbar-fixed-top " style="background-color: #084B8A">
+	<nav class="navbar navbar-expand-lg navbar-default navbar-fixed-top " >
 		<div class="container">
 			<div class="navbar-header" >
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -209,10 +209,10 @@ function mascara_cpf(cpf)
 					<div class="panel-heading"  >
 						<div class="row">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="font-family:courier,arial,helvetica;text-align: left;">
-								<strong> BALANCOS DE MOVIMENTO - LIVRO Nº <?php echo $livro ?></strong>
+								<font color="black" size="3" style="font-family:courier,arial,helvetica;"><strong> BALANCOS DE MOVIMENTO - LIVRO Nº <?php echo $livro ?></strong></font>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="font-family:courier,arial,helvetica;text-align: right;">
-								<strong> DEMOSTRATIVO MENSAL </strong>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xd-6" style="text-align: right;">
+								<font color="black" size="3" style = "font-family:courier,arial,helvetica;"><strong> DEMOSTRATIVO MENSAL </strong></font>
 							</div>
 						</div>	
 					</div>

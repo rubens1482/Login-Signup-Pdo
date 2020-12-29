@@ -43,7 +43,7 @@
 	}
 }
 (/** @lends <global> */function( $ ) {
-	"use strict";
+	"uso restrito";
 
 	/**
 	 * DataTables is a plug-in for the jQuery Javascript library. It is a highly
@@ -174,8 +174,8 @@
 	};
 	
 	
-	// Basically the same as _pluck, but rather than looping over `a` we use `order`
-	// as the indexes to pick from `a`
+	// Basicamente o mesmo que _pluck, mas ao invés de fazer um loop sobre `a` usamos` ordem`
+	// como os índices para escolher de `a`
 	var _pluck_order = function ( a, order, prop, prop2 )
 	{
 		var out = [];
@@ -10332,7 +10332,7 @@
 		 *      } );
 		 *    } )
 		 *    
-		 *    jumlah default data yang ditampilkan
+		 *    a quantidade padrão de dados exibidos
 		 */
 		"iDisplayLength": 10,
 	
@@ -10574,7 +10574,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "tidak ada data didalam tabel",
+			"sEmptyTable": "não há dados na tabela",
 	
 	
 			/**
@@ -10606,7 +10606,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+			"sInfo": "Mostrando _START_ para _END_ de _TOTAL_ dados",
 	
 	
 			/**
@@ -10627,7 +10627,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Menampilkan 0 when 0 dari 0 data",
+			"sInfoEmpty": "mostrando 0 quando 0 de 0 dados",
 	
 	
 			/**
@@ -10649,7 +10649,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(seleksi dari _MAX_ total data)",
+			"sInfoFiltered": "(seleção de _MAX_ dados totais)",
 	
 	
 			/**
@@ -10736,7 +10736,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Tampilkan _MENU_ data",
+			"sLengthMenu": "Mostrando _MENU_ dados",
 	
 	
 			/**
@@ -10816,7 +10816,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Cari: ",
+			"sSearch": "procurando por: ",
 	
 	
 			/**
@@ -10863,7 +10863,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "Tidak ditemukan data yang cocok"
+			"sZeroRecords": "Nenhuma registro encontrado"
 		},
 	
 	

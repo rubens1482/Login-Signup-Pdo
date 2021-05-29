@@ -13,20 +13,22 @@ error_reporting(E_ERROR | E_WARNING);
 	<link href="assets/css/bootstrap.css" rel="stylesheet">
 	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
 	
+	<script src="assets/js/bootstrap.min.js"></script>
+	<!--
 	<script src="vendor/jquery-1.11.3.min.js"></script>
 	<script src="vendor/main.js"></script>
-	<script src="vendor/plugins.js"></script>
+	<script src="vendor/plugins.js"></script>-->
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<!-- necessário para abrir os DataTables -->
-	<script src="assets/js/dataTables/js/jquery.dataTables.js"></script>
+		<!-- necessário para abrir os DataTables 
+	<script src="assets/js/dataTables/js/jquery.dataTables.js"></script>-->
+	<!--
 	<script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
-	<script src="assets/js/dataTables/js/dataTables.bootstrap.js"></script>
-		<!-- necessário para abrir o calendario datepicker -->
+	<script src="assets/js/dataTables/js/dataTables.bootstrap.js"></script>-->
+		<!-- necessário para abrir o calendario datepicker 
+		
 	<script type="text/javascript">
-	
 	  $(function () {
 		// toolip
 		$('[data-toggle="tooltip"]').tooltip();
@@ -40,9 +42,9 @@ error_reporting(E_ERROR | E_WARNING);
 			"info":     true
 		} );
 	  })
-	  
 	</script>	
-	
+	-->
+	<!-- ESTE COMANDO JAVASCRIPT SERVE PARA ABRIR O CALENDÁRIO JQUERY -->
 	<script >
 	  $( function() {
 		  $( "#datamov, #datapicker, #data_i, #data_f" ).datepicker({
@@ -59,6 +61,7 @@ error_reporting(E_ERROR | E_WARNING);
 		});
 	  } );
 	</script>
+	<!-- ESTE COMANDO JAVASCRIPT SERVE PARA ABRIR O CALENDÁRIO JQUERY 
 	<script type="text/javascript">
 	  $(function () {
 	 // datatables
@@ -71,7 +74,8 @@ error_reporting(E_ERROR | E_WARNING);
 	} );
 	  })
 	</script>
-	
+	-->
+	<!-- ESTE COMANDO JAVASCRIPT SERVE PARA VALIDAR OS CAMPOS TIPO DE MOVIMENTO, FOLHA, DESCRIÇÃO E VALOR -->
 	<script type="text/javascript" language="javascript">
 		function valida_dados (){
 			if(document.getElementById("tipo").value == ""){
@@ -123,7 +127,7 @@ function mascara_cpf(cpf)
 	<title> welcome - <?php print($userRow['user_email']); ?></title>
 </head>
 <body> 
-	<!-- 	INICIO DA NAVBAR PRINCIPAL CONTENDO NOME DO SISTEMA, DATA ATUAL, LOGIN USUARIO, LOGIN CONTA, MENU DE CONTEXTO -->
+	<!-- INICIO DA NAVBAR PRINCIPAL CONTENDO NOME DO SISTEMA, DATA ATUAL, LOGIN USUARIO, LOGIN CONTA, MENU DE CONTEXTO -->
 	<nav class="navbar navbar-expand-lg navbar-default navbar-fixed-top " >
 		<div class="container">
 			<div class="navbar-header" >
@@ -181,10 +185,11 @@ function mascara_cpf(cpf)
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
-	</nav>
-	<!-- 	FIM DA NAV BAR PRINCIPAL -->
+	</nav><!-- 	FIM DA NAV BAR PRINCIPAL -->
+	
 	<!-- 	INICIO DO BALANÇO DE MOVIMENTO -->
-	<?php 
+	
+	<?php //codigo php para busca dos dados do balanço mensal'
 	$mostrar = new MOVS;
 	$dados = $mostrar->bal_pormes($contapd,$mes_hoje, $ano_hoje);
 	
@@ -253,7 +258,6 @@ function mascara_cpf(cpf)
 										<strong><span style="font-size:14px; color:<?php echo "#C00" ?>"><?php print formata_dinheiro($saidas_m) ?></span></strong>
 									</div>
 								</div>
-								<!--  SALDO ATUAL BALANÇO MENSAL  -->
 								<!--  BALANÇO BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00; background: #DCDCDC;">
@@ -267,6 +271,7 @@ function mascara_cpf(cpf)
 										</strong>
 									</div>
 								</div>
+								<!--  SALDO ATUAL BALANÇO MENSAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00;">
 										<strong><span style="font-size:14px; color:<?php echo "#006400" ?>">Saldo Atual:</span></strong>
@@ -312,7 +317,7 @@ function mascara_cpf(cpf)
 										<strong><span style="font-size:14px; color:<?php echo "#C00" ?>"><?php print formata_dinheiro($sai_acab) ?></span></strong>	
 									</div>
 								</div>
-								<!--  BALANÇO BALANÇO MENSAL -->
+								<!--  BALANÇO BALANÇO ANUAL -->
 								<div class="row">
 									<div class="col-sm-6" style="font-family:courier,arial,helvetica;text-align: left; border-bottom: 1px dashed #f00; background: #DCDCDC;">
 										<strong><span style="font-size:14px; color:<?php if($bal > 0) { echo "#0000FF"; }else{ echo "#C00";} ?>">Balanco:</span></strong>
@@ -338,13 +343,28 @@ function mascara_cpf(cpf)
 							<!--  FIM DO BALANCO ANUAL -->
 						</div>
 						<br>
+						<!--  FORMULARIO DE ESCOLHA DO MES E ANO SELECIONADOS -->
 						<div class="row" >
 							<div class="wrapper" style=" background: #DCDCDC; ">
 								<form class="form-inline" style="font-family:courier,arial,helvetica;text-align: center;">
+									
+									
+									<label for="conta">
+									Conta:
+									</label>
+									
+									<select class="form-control" id="conta" onchange="location.replace('?conta=<?php echo $contapd?>&mes=<?php echo $mes_hoje?>&ano='+this.value)">
+										<?php
+											for ($i=2004;$i<=2050;$i++){
+											?>
+											<option value="<?php echo $i?>" <?php if ($i==$ano_hoje) echo "selected=selected"?> ><?php echo $i?></option>
+										<?php }?>
+									</select>
+									
 									<label for="ano">
 									Ano:
 									</label>
-									<select class="form-control" id="sel1" onchange="location.replace('?mes=<?php echo $mes_hoje?>&ano='+this.value)">
+									<select class="form-control" id="sel1" onchange="location.replace('?conta=<?php echo $contapd?>&mes=<?php echo $mes_hoje?>&ano='+this.value)">
 										<?php
 											for ($i=2004;$i<=2050;$i++){
 											?>
@@ -360,10 +380,10 @@ function mascara_cpf(cpf)
 										?>
 										<?php if($mes_hoje==$i){?>
 										<!-- MES SELECIONADO -->
-										<a href="?mes=<?php echo $i?>&ano=<?php echo $ano_hoje?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-calendar"></span>
+										<a href="?conta=<?php echo $contapd?>&mes=<?php echo $i?>&ano=<?php echo $ano_hoje?>" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-calendar"></span>
 										<?php }else{?>
 										<!-- OUTROS MESES -->
-										<a href="?mes=<?php echo $i?>&ano=<?php echo $ano_hoje?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-calendar"></span>
+										<a href="?conta=<?php echo $contapd?>&mes=<?php echo $i?>&ano=<?php echo $ano_hoje?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-calendar"></span>
 										<?php } ?>	
 										<?php echo mostraMes($i);?>
 										</a>
@@ -385,8 +405,7 @@ function mascara_cpf(cpf)
 			</div>
 		</div>
 	</div>
-	<!-- 	INICIO DO BALANÇO DE MOVIMENTO TESTE DE FUNÇÃO dados_saldo -->
-	
+		
 	<!-- 	FIM DA BALANÇO DE MOVIMENTO -->
 	
 	<!-- 	INICIO DO TABELA DE DADOS FOLHA DE MOVIMENTOS -->
@@ -411,7 +430,7 @@ function mascara_cpf(cpf)
 					$mostrar = new MOVS;
 					$dados = $mostrar->dados_pormes($contapd,$mes_hoje, $ano_hoje);	
 				?>
-				<table id="tb_index" class="table table-responsive table-bordered table-striped table-condensed table-hover" style="">
+				<table id="tb_index" class="table table-responsive table-bordered table-striped table-condensed table-hover cell-border display" style="width:100%">
 					<thead>
 						<tr >
 							<th >Seq.</th>
@@ -567,8 +586,8 @@ function mascara_cpf(cpf)
 		<script src="assets/js/dataTables/js/jquery.dataTables.js"></script>
 		<script src="assets/js/dataTables/js/dataTables.bootstrap.js"></script>
 		
-		<!-- necessário para abrir o calendario datepicker -->
-		<script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
+		<!-- necessário para abrir o calendario datepicker 
+		<script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>-->
 		
 		<script type="text/javascript">
 		  $(function () {
@@ -576,7 +595,7 @@ function mascara_cpf(cpf)
 			$('[data-toggle="tooltip"]').tooltip();
 			// datatables
 			$('#tb_index').dataTable( {
-				"lengthMenu": [[2, 5, 10, 12, 15, -1], [2, 5, 10, 12, 15, "All"]],
+				"lengthMenu": [[3, 5, 10, 12, 15, -1], [3, 5, 10, 12, 15, "All"]],
 				"pageLength": 5,
 				"pagingType": "full_numbers",
 				"paging": true,

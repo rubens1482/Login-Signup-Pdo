@@ -27,19 +27,19 @@
 	//
 	if (isset($_GET['dia'])) 
     $dia_hoje = $_GET['dia'];
-else
-    $dia_hoje = date('d');
+	else
+		$dia_hoje = date('d');
 
-if (isset($_GET['mes']))
-    $mes_hoje = $_GET['mes'];
-else
-    $mes_hoje = date('m');
+	if (isset($_GET['mes']))
+		$mes_hoje = $_GET['mes'];
+	else
+		$mes_hoje = date('m');
 
-if (isset($_GET['ano']))
-    $ano_hoje = $_GET['ano'];
-else
-    $ano_hoje = date('Y');
-$hoje = $dia_hoje ."-" . $mes_hoje . "-" . $ano_hoje;
+	if (isset($_GET['ano']))
+		$ano_hoje = $_GET['ano'];
+	else
+		$ano_hoje = date('Y');
+	$hoje = $dia_hoje ."-" . $mes_hoje . "-" . $ano_hoje;
 
 ?>
 <?php // codigos para saldos 

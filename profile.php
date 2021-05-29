@@ -1,8 +1,8 @@
 <?php
 
-	require_once("session.php");
+	require_once("config/session.php");
 	
-	require_once("class.user.php");
+	require_once("class/class.user.php");
 	$auth_user = new USER();
 	
 	$user_id = $_SESSION['user_session'];

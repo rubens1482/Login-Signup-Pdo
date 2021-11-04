@@ -227,6 +227,7 @@ $datainicial = date("Y-m-d");
 $datafinal = date("Y-m-d");
 }
 // SALDO ANTERIOR CASO O MÊS SEJA JANEIRO OU OUTROS MESES...
+/*
 	if ($mes_hoje == 1){
 		$saldo_ant=$saldo_aa;
 	} else {
@@ -238,4 +239,5 @@ $datafinal = date("Y-m-d");
 	} else {
 		$resultado_mes=$saldo_aa+$saldo_aca+$saldo_m;
 	}	
+*/
 ?>

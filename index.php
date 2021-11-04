@@ -15,35 +15,7 @@ error_reporting(E_ERROR | E_WARNING);
 	<script src="assets/js/jquery.min.js"></script>
 	
 	<script src="assets/js/bootstrap.min.js"></script>
-	<!--
-	<script src="vendor/jquery-1.11.3.min.js"></script>
-	<script src="vendor/main.js"></script>
-	<script src="vendor/plugins.js"></script>-->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<!-- necessário para abrir os DataTables 
-	<script src="assets/js/dataTables/js/jquery.dataTables.js"></script>-->
-	<!--
-	<script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
-	<script src="assets/js/dataTables/js/dataTables.bootstrap.js"></script>-->
-		<!-- necessário para abrir o calendario datepicker 
-		
-	<script type="text/javascript">
-	  $(function () {
-		// toolip
-		$('[data-toggle="tooltip"]').tooltip();
-		// datatables
-		$('#tb_home_f').dataTable( {
-			"lengthMenu": [[2, 5, 10, 12, 15, -1], [2, 5, 10, 12, 15, "All"]],
-			"pageLength": 5,
-			"pagingType": "full_numbers",
-			"paging": true,
-			"ordering": true,
-			"info":     true
-		} );
-	  })
-	</script>	
-	-->
+	
 	<!-- ESTE COMANDO JAVASCRIPT SERVE PARA ABRIR O CALENDÁRIO JQUERY -->
 	<script >
 	  $( function() {
@@ -550,7 +522,7 @@ function mascara_cpf(cpf)
 		
 		
 	</div>
-	<!-- FORMULÁRIOS MODAIS - RELATORIO EM PDF -->
+	<!-- FORMULÁRIOS MODAIS - RELATORIO EM PDF COM REFERENCIA DO MÊS/ANO E CONTA-->
 	<div class="modal fade" id="modal_pdf" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content" >
@@ -566,8 +538,7 @@ function mascara_cpf(cpf)
 									Męs: <input type="text" name="mes" value="<?php echo $mes_hoje?>" class="form-control input-sm" size="1">
 									Ano: <input type="text" name="ano" value="<?php echo $ano_hoje?>" class="form-control input-sm" size="1">
 									Conta: <input type="text" name="conta" value="<?php echo $contapd?>" class="form-control input-sm" size="1">
-									<button type="submit" class="btn btn-warning btn-sm" name="btn_pdf" ><span class="glyphicon glyphicon-check"></span> Imprimir em PDF </button>
-											
+									<button type="submit" class="btn btn-warning btn-sm" name="btn_pdf" ><span class="glyphicon glyphicon-check"></span> Imprimir em PDF </button>											
 								</div>
 							</div>
 						</form>	

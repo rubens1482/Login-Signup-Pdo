@@ -3,7 +3,7 @@
 <script src="jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script src="jQuery-Mask-Plugin-v1.7.7-0/jquery.mask.min.js"></script>
 <script>
-  $( function() {
+  $( function valida_pdf() {
 	  $( "#data_ini, #data_fim" ).datepicker({
 		altField: "#actualDate",
 		dateFormat: "dd-mm-yy",
@@ -35,7 +35,7 @@
 					
 						<div class="panel panel-primary">
 							<div class="panel-body">
-								<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php">
+								<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php" onsubmit="return valida_pdf(this)">
 									<div class="controls">
 										<label class="control-label" for="inputName">Data Inicial:</label>
 										<input type="text" name="data_ini" id="data_ini" value="<?php echo invertData($dti) ?>" class="form-control input-sm" size="8">

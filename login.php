@@ -73,50 +73,54 @@ require_once "config/config_user.php";
 </br>
 <div class="login-form">
 	
-    <form  method="post" id="login-form">
+    
 		<!-- CODIGO PHP PARA MOSTRAR O FORMULARIO DE RECUPERAÇÃO DE SENHA  -->
 		<?php
 			if(isset($_GET['recuperar']) && $_GET['recuperar'] == 'sim'){
 		?>
-		<h2 class="text-center">Password Recovery</h2> 
-		<div id="error">
-		<!--  MENSAGEM DE ERRO -->
-		<?php
-			if(isset($status))
-			{
-				?>
-				<div class="alert alert-danger">
-				   <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $status; ?> !
-				</div>
-				<?php
-			}
-		?>
-		</div><!--   -->
+			
+			
 		<!--  CAMPO "E-MAIL" PARA RECUPERAR -->
-		<div class="form-group">
-			<div class="input-group">
-				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-				<input type="text" class="form-control" name="txt_email" placeholder="E-mail" >	
+		<form  method="post" id="login-recover" action="recuperar.php">
+			<h2 class="text-center">Password Recovery</h2>
+			<div id="error">
+			<!--  MENSAGEM DE ERRO -->
+			<?php
+				if(isset($status))
+				{
+					?>
+					<div class="alert alert-danger">
+					   <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $status; ?> 
+					</div>
+					<?php
+				}
+			?>
+			</div><!--   -->
+			<div class="form-group">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+					<input type="text" class="form-control" name="txt_email" placeholder="E-mail" >	
+				</div>
 			</div>
-		</div>
-		<!--  CAMPO "AÇÃO" PARA VALIDAR A RECUPERAÇÃO -->
-		<div class="form-group">
-			<input type="hidden" class="form-control" name="acao"  value="recuperar">
-		</div>
-		<!--  BOTÃO "ENVIAR" PARA RECUPERAR SENHA -->    
-		<div class="form-group">
-			<button type="submit" name="btn-recover" class="btn btn-primary login-btn btn-block">Recovery password</button>
-		</div>
-		<div class="or-seperator"><i>or</i></div>
-		<!--  BOTÃO COMANDO REMEMBER ME -->
-		<div class="clearfix">
-			<label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
-			<a href="login.php" class="pull-right">Login</a>
-		</div>
+			<!--  CAMPO "AÇÃO" PARA VALIDAR A RECUPERAÇÃO -->
+			<div class="form-group">
+				<input type="hidden" class="form-control" name="acao"  value="recuperar">
+			</div>
+			<!--  BOTÃO "ENVIAR" PARA RECUPERAR SENHA -->    
+			<div class="form-group">
+				<button type="submit" name="esqueciasenha" class="btn btn-primary login-btn btn-block">Recovery password</button>
+			</div>
+			<div class="or-seperator"><i>or</i></div>
+			<!--  BOTÃO COMANDO REMEMBER ME -->
+			<div class="clearfix">
+				<label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
+				<a href="login.php" class="pull-right">Login</a>
+			</div>
+		</form>
 	
 		<!-- COMANDO "ELSE" PARA MOSTRAR O FORMULÁRIO DE LOGIN  -->	
 		<?php } else { ?>
-	
+		<form  method="post" id="login-form">
 			<h2 class="text-center">Users Login</h2> 
 			<div id="error">
 			<!--  MENSAGEM DE ERRO -->
@@ -155,8 +159,8 @@ require_once "config/config_user.php";
 				<label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>
 				<a href="?recuperar=sim" class="pull-right">Esqueci Minha Senha</a>
 			</div>
-		<?php } ?>    
-    </form>
+			<?php } ?>    
+		</form>
 	<!-- BOTÃO PARA CRIAR CONTA  -->
     <p class="text-center text-muted small">Don't have an account? <a href="sign-up.php">Sign up here!</a></p>
 </div>

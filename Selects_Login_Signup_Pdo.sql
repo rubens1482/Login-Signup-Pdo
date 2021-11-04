@@ -171,3 +171,5 @@ lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movi
  FROM lc_movimento WHERE idconta=1 and month(datamov)=3 and year(datamov)=2015 ORDER BY datamov
  ASC;
 
+
+select abastecimentos.idveiculo, abastecimentos.data_abast ,abastecimentos.hora_abast ,abastecimentos.quantidade, abastecimentos.valor_unit ,abastecimentos.valorcompra ,(select max(l1.km_abast) from abastecimentos l1 where ((l1.idveiculo = abastecimentos.idveiculo) and (l1.km_abast < abastecimentos.km_abast))) AS km_anterior, abastecimentos.km_abast, (select (abastecimentos.km_abast - km_anterior)) AS km_perc,(select (km_perc / abastecimentos.quantidade)) AS kmporlitro,(select (abastecimentos.valorcompra / km_perc)) AS reaisporkm,(select (abastecimentos.quantidade / km_perc)) AS litrosporkm, fornecedores.razao_social from abastecimentos INNER JOIN fornecedores on abastecimentos.idfornecedor=fornecedores.idfornecedor where abastecimentos.idveiculo=1 ORDER BY  abastecimentos.data_abast ASC;

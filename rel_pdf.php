@@ -36,9 +36,9 @@ $pdo = new Database();
 $db = $pdo->dbConnection();
 
 
-	
+/*	
 $dia = 01;
-
+*/
 
 $datainicial = date("$dia-$mm-$aa");
 $datafinal = date("t-$mm-$aa");
@@ -134,6 +134,8 @@ $datafinal = date("t-$mm-$aa");
 	$saidas_ep=$qrsep['saidas_ep'];
 	
 // SALDO ANTERIOR CASO O MÊS SEJA JANEIRO OU OUTROS MESES...
+	
+
 	if ($mm == 1){
 		$saldo_ant=$saldo_aa;
 	} else {
@@ -145,11 +147,12 @@ $datafinal = date("t-$mm-$aa");
 	} else {
 		$resultado_mes=$saldo_aa+$saldo_aca+$saldo_m;
 	}	
+	
 ?>
 
 <?php
 require('fpdf181/fpdf.php');
-
+ob_start (); 
 class PDF extends FPDF
 {
 function Header()
@@ -184,12 +187,16 @@ $pdo = new Database();
 	$db = $pdo->dbConnection();
 	//$stmt = $db->prepare("SELECT * FROM lc_movimento WHERE idconta='$contapd' and mes='$mes_hoje' and ano='$ano_hoje'");
 	//$stmt = $db->prepare("SELECT * FROM lc_movimento WHERE month(datamov)='$mes_hoje' and year(datamov)='$ano_hoje' and idconta='$contapd'");
+	/*
 	$stmt = $db->prepare("SELECT * FROM lc_movimento WHERE idconta=:cc and month(datamov)=:mm and year(datamov)=:aa ORDER BY datamov ASC");
 	$stmt->bindparam(':cc', $cc );
 	$stmt->bindparam(':mm', $mm );
 	$stmt->bindparam(':aa', $aa );
 	$stmt->execute();
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+	*/
+	$mostrar = new MOVS;
+	$dados = $mostrar->dados_pormes($cc,$mm, $aa);	
 	$cont=0;
 	$seq=0;
 	$saldo=0;
@@ -240,7 +247,7 @@ $rel->Cell(30,7,utf8_decode("Saídas"),1,0,"C",2);
 $rel->Cell(30,7,utf8_decode("Saldo"),1,0,"C",2);
 $rel->Ln(7);
 	
-	foreach ($result as $row) {
+	foreach ($dados as $row) {
 		$cont++;
 		$seq++;
 	

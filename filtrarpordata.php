@@ -19,7 +19,7 @@ $mostrar = new MOVS;
 	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
-	
+	<!-- 	SCRIPT JAVASCRIPT PARA MOSTRAR CALENDÁRIO JQUERY -->
 	<script type="text/javascript">
 	  $( function() {
 		  $( "#datamov, #datamov, #datapicker, #data_i, #data_f" ).datepicker({
@@ -36,7 +36,7 @@ $mostrar = new MOVS;
 		});
 	  } );
 	</script>
-	
+	<!-- 	SCRIPT JAVASCRIPT PARA PAGINAÇÃO DATATABLE -->
 	<script type="text/javascript">
 	  $(function () {
 		// toolip
@@ -44,7 +44,7 @@ $mostrar = new MOVS;
 
 	 // datatables
 	$('#tb_home').dataTable( {
-		"lengthMenu": [[2, 7, 10, 12, 15, 25, -1], [2, 7, 10, 12, 15, 25, "All"]],
+		"lengthMenu": [[2, 4, 7, 10, 12, 15, -1], [2, 4, 7, 10, 12, 15, "All"]],
 		"pageLength": 7,
 		"pagingType": "full_numbers",
 		"order": [[ 3, "asc" ]],
@@ -53,11 +53,11 @@ $mostrar = new MOVS;
 	} );
 	  })
 	</script>
-	
+	<!-- 	SCRIPT JAVASCRIPT IMPEDIR EXECUÇÃO DO CODIGO "FILTRAR POR DATA" SEM O PREENCHIMENTO DOS CAMPOS "data_i" e "data_f" -->
 	<script type="text/javascript" language="javascript">
 		function valida_form (){
 			if(document.getElementById("data_i").value == ""){
-			alert('Por favor, preencha o campo Data Inicial');
+			alert('Preencha o campo Data Inicial');
 			document.getElementById("data_i").focus();
 			return false
 			} else {
@@ -69,7 +69,24 @@ $mostrar = new MOVS;
 			}
 		}
 	</script>
+	<!-- 	SCRIPT JAVASCRIPT PARA DETALHAMENTO DA TABELA DATATABLE -->
+	<script>
+		function valida_pdf (){
+			if(document.getElementById("data_i").value == ""){
+			alert('Preencha o campo Data Inicial');
+			document.getElementById("data_ini").focus();
+			return false
+			} else {
+				if(document.getElementById("data_f").value == ""){
+					alert('Preencha o campo Data Final');
+					document.getElementById("data_fim").focus();
+					return false
+				}
+			}
+		}
+	</script>
 	<!-- 	SCRIPT JAVASCRIPT PARA DATATABLES CSS -->
+
 	<title> welcome - <?php print($userRow['user_email']); ?></title>
 </head>
 <body> 
@@ -83,7 +100,7 @@ $mostrar = new MOVS;
 				<span class="icon-bar"> vamos </span>
 				<span class="icon-bar"> terá </span>
 			  </button>
-			  <a class="navbar-brand" href="http://www.localhost/Login-Signup-Pdo/home.php">Livro Caixa <?php print $accountRow['conta'] ?></a>
+			  <a class="navbar-brand" href="http://www.localhost/Login-Signup-Pdo/filtrarpordata.php">Livro Caixa <?php print $accountRow['conta'] ?></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse" >
 				<ul class="nav navbar-nav">
@@ -363,7 +380,7 @@ $mostrar = new MOVS;
 										<?php } ?>
 									</div>	
 									<a href="#modal_pdf" class="btn btn-sm btn-success " name="modal_periodo" data-toggle="modal">
-										<i class="glyphicon glyphicon-plus"></i> pdf	
+										<i class="glyphicon glyphicon-plus"></i> pdf mês	
 									</a>
 									<a href="#addmov" class="btn btn-sm btn-success " name="add_mov" data-toggle="modal" style="border: solid 1px; border-radius: 1px; box-shadow: 1px 1px 1px 1px black; border-radius:3px 3px 3px 3px;">
 										<i class="glyphicon glyphicon-plus"></i> Novo
@@ -374,15 +391,21 @@ $mostrar = new MOVS;
 						</div>
 						
 					</div>
+					
 					<div class="panel-footer" style="text-align: center;">
 						<form class="form-inline" name="form_filtro_cat" method="get" action="" onsubmit="return valida_form(this)">
-							<span><strong> filtrar por cod/desc: </strong></span><input type="text" name="busca" class="form-control input-sm" style="width:180px;" value="">
+							<span><strong> filtrar por Id / descrição: </strong></span><input type="text" name="busca" class="form-control input-sm" style="width:180px;" value="">
 							<span><strong> Data inicial: </strong></span><input type="text" name="data_i" id="data_i" class="form-control input-sm"  style="width:110px;" value="" >
 							<span><strong> Data final: </strong></span><input type="text" name="data_f" id="data_f" class="form-control input-sm"  style="width:110px;" value="">
 							<span><strong><label> Categoria: </label></strong></span>
 							<input type="hidden" name="data_hoje" value="<?php echo $dia_hoje . "-" . mostraMes($mes_hoje) ."-" . $ano_hoje ?>">
+							<!-- este botão foi adicionado para abrir o form modal do relatorio por data -->
+							<button type="button" class="btn btn-sm btn-success" name="modal_date" data-toggle="modal" data-target="#modal_date">
+							 <i class="glyphicon glyphicon-plus"> </i> pdf periodo botão
+							</button>
+							<!-- estou mantendo este a href até o botão de abrir o modal ficar pronto -->
 							<a href="#modal_date" class="btn btn-sm btn-success " name="modal_date" data-toggle="modal">
-								<i class="glyphicon glyphicon-plus"></i> pdf
+								 pdf periodo
 							</a>
 							<button type="submit" name="filtrar_data" class="btn btn-default btn-sm"  value="Filtrar" >Filtrar</button>	
 						</form>
@@ -475,7 +498,7 @@ $mostrar = new MOVS;
 							
 								
 								// COMANDOS SQL PARA VERIFICAR CAMPO BUSCA, DATA INICIAL E DATA FINAL
-								
+								// aqui inicia o contador em "0", a sequencia em "0" e o saldo em "0"
 								$cont=0;
 								$seq=0;
 								$saldo=0;
@@ -585,18 +608,19 @@ $mostrar = new MOVS;
             <div class="modal-content" >
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <center><h4 class="modal-title" id="myModalLabel">Exportar p/ PDF Ref.: <?php echo $mes_hoje ?>/<?php echo $ano_hoje ?> - Conta: <?php echo $contapd ?></h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Exportar p/ PDF.  periodo: De: <?php echo $data_i ?> A:<?php echo $data_f ?> - Conta: <?php echo $contapd ?></h4></center>
                 </div>
                 <div class="modal-body" >
+					<span id="msg-error"></span>
 					<div class="panel panel-primary">
 						<div class="panel-body">
-							<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php">
+							<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php" onsubmit="return valida_form(this)">
 								
 								<div class="controls">
 									<label class="control-label" for="inputName">Data Inicial:</label>
-									<input type="text" name="data_ini" id="data_ini" value="<?php echo invertData($dti) ?>" class="form-control input-sm" size="8">
+									<input type="text" name="data_ini" id="data_ini" value="<?php echo invertData($data_i) ?>" class="form-control input-sm" size="8">
 									<label class="control-label" for="inputName">Data Final:</label>
-									<input type="text" name="data_fim" id="data_fim" value="<?php echo invertData($dti) ?>" class="form-control input-sm" size="8">
+									<input type="text" name="data_fim" id="data_fim" value="<?php echo invertData($data_f) ?>" class="form-control input-sm" size="8">
 								</div>
 								<br>
 								<div class="controls">
@@ -633,7 +657,7 @@ $mostrar = new MOVS;
 			$('[data-toggle="tooltip"]').tooltip();
 			// datatables
 			$('#tb_home_filtrar').dataTable( {
-				"lengthMenu": [[2, 5, 10, 12, 15, -1], [2, 5, 10, 12, 15, "All"]],
+				"lengthMenu": [[2, 4, 7, 10, 12, -1], [2, 4, 7, 10, 12, "All"]],
 				"pageLength": 5,
 				"pagingType": "full_numbers",
 				"paging": true,

@@ -13,13 +13,13 @@ class USER
 		$db = $database->dbConnection();
 		$this->conn = $db;
     }
-	// FUNÇÃO PARA EXECUTAR CONSULTAS NO BANCO
+	// FUNï¿½ï¿½O PARA EXECUTAR CONSULTAS NO BANCO
 	public function runQuery($sql)
 	{
 		$stmt = $this->conn->prepare($sql);
 		return $stmt;
 	}
-	// FUNÇÃO PARA REGISTRAR USUÁRIO NO SISTEMA
+	// FUNï¿½ï¿½O PARA REGISTRAR USUï¿½RIO NO SISTEMA
 	public function register($uname,$umail,$upass,$ufoto)
 	{
 		try
@@ -43,7 +43,7 @@ class USER
 			echo $e->getMessage();
 		}				
 	}
-	// FUNÇÃO PARA EFETUAR LOGIN NO SISTEMA DO USUÁRIO
+	// FUNï¿½ï¿½O PARA EFETUAR LOGIN NO SISTEMA DO USUï¿½RIO
 	public function doLogin($uname,$umail,$upass)
 	{
 		try
@@ -55,8 +55,10 @@ class USER
 			{
 				if(password_verify($upass, $userRow['user_pass']))
 				{
-					$_SESSION['user_session'] = $userRow['user_id'];
+					$_SESSION['user_session_id'] = $userRow['user_id'];
 					$_SESSION['user_mail'] = $userRow['user_email'];
+					$_SESSION['user_pass'] = $userRow['user_pass'];
+					$_SESSION['user_name'] = $userRow['user_name'];
 					
 					return true;
 				}
@@ -71,7 +73,7 @@ class USER
 			echo $e->getMessage();
 		}
 	}
-	// FUNÇÃO PARA VERIFICAR LOGIN CORRETO DO USUÁRIO
+	// FUNï¿½ï¿½O PARA VERIFICAR LOGIN CORRETO DO USUï¿½RIO
 	public function is_loggedin()
 	{
 		if(isset($_SESSION['user_session']))
@@ -79,19 +81,29 @@ class USER
 			return true;
 		}
 	}
-	// FUNÇÃO PARA REDIRECIONAMENTO DE PÁGINA
+
+	// FUNCAO PARA BUSCAR OS DADOS DO USUARIO LOGADO substituindo o config_session.php
+	public function dadoslogin()
+	{
+		if(isset($_SESSION['user_session']))
+		{
+			
+			return true;
+		}
+	}
+	// FUNï¿½ï¿½O PARA REDIRECIONAMENTO DE Pï¿½GINA
 	public function redirect($url)
 	{
 		header("Location: $url");
 	}
-	// FUNÇÃO PARA DESLOGAR DO SISTEMA TANTO DA CONTA QUANTO DO USUÁRIO
+	// FUNï¿½ï¿½O PARA DESLOGAR DO SISTEMA TANTO DA CONTA QUANTO DO USUï¿½RIO
 	public function doLogout()
 	{
 		session_destroy();
 		unset($_SESSION['user_session']);
 		return true;
 	}
-	// FUNÇÃO PARA GERAR CAHVE DE ACESSO PARA RECUPERAR SENHA
+	// FUNï¿½ï¿½O PARA GERAR CAHVE DE ACESSO PARA RECUPERAR SENHA
 	public function checaCadastroEmail($umail)
 	{
 		try
@@ -113,7 +125,7 @@ class USER
 		}
 	}
 	
-	// FUNÇÃO PARA CHECAR CHAVE DE ACESSO GERADA
+	// FUNï¿½ï¿½O PARA CHECAR CHAVE DE ACESSO GERADA
 	public function ChecaCodigo($codigo)
 	{
 		try
@@ -136,7 +148,7 @@ class USER
 		}
 	}	
 	
-	// FUNÇÃO PARA CHECAR VALIDADE DA CHAVE DE RECUPERAÇÃO
+	// FUNï¿½ï¿½O PARA CHECAR VALIDADE DA CHAVE DE RECUPERAï¿½ï¿½O
 	public function ChecaValidadeCodigo($codigo,$data_fim)
 	{
 		try
@@ -158,7 +170,7 @@ class USER
 			echo $e->getMessage();
 		}
 	}	
-	// FUNÇÃO PARA ATUALIZAR SENHA DO USUÁRIO
+	// FUNï¿½ï¿½O PARA ATUALIZAR SENHA DO USUï¿½RIO
 	public function setNovaSenha($novasenha,$id)
 	{
 		try
@@ -173,7 +185,7 @@ class USER
 			echo $e->getMessage();
 		}
 	}
-	// FUNÇÃO PARA VALIDAÇÃO DE EMAIL
+	// FUNï¿½ï¿½O PARA VALIDAï¿½ï¿½O DE EMAIL
 	public function validaEmail($umail)
 	{
 		try
@@ -190,7 +202,7 @@ class USER
 		}
 	}
 
-	// FUNÇÃO PARA INSERIR CODIGO DE RECUPERAÇÃO
+	// FUNï¿½ï¿½O PARA INSERIR CODIGO DE RECUPERAï¿½ï¿½O
 	public function inserecodigo($codigo,$dt_expirar)
 	{
 		try
@@ -210,7 +222,7 @@ class USER
 		}				
 	}
 	
-	// FUNÇÃO PARA INSERIR CODIGO DE RECUPERAÇÃO
+	// FUNï¿½ï¿½O PARA INSERIR CODIGO DE RECUPERAï¿½ï¿½O
 	public function deletacodigo($codigo, $dt_fim)
 	{
 		try

@@ -172,4 +172,34 @@ lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movi
  ASC;
 
 
-select abastecimentos.idveiculo, abastecimentos.data_abast ,abastecimentos.hora_abast ,abastecimentos.quantidade, abastecimentos.valor_unit ,abastecimentos.valorcompra ,(select max(l1.km_abast) from abastecimentos l1 where ((l1.idveiculo = abastecimentos.idveiculo) and (l1.km_abast < abastecimentos.km_abast))) AS km_anterior, abastecimentos.km_abast, (select (abastecimentos.km_abast - km_anterior)) AS km_perc,(select (km_perc / abastecimentos.quantidade)) AS kmporlitro,(select (abastecimentos.valorcompra / km_perc)) AS reaisporkm,(select (abastecimentos.quantidade / km_perc)) AS litrosporkm, fornecedores.razao_social from abastecimentos INNER JOIN fornecedores on abastecimentos.idfornecedor=fornecedores.idfornecedor where abastecimentos.idveiculo=1 ORDER BY  abastecimentos.data_abast ASC;
+select veiculos.modelo, 
+DATE_FORMAT (abastecimentos.data_abast,'%d/%m/%Y') AS data_abast, 
+(SELECT dayname(data_abast)) as diasem,
+abastecimentos.hora_abast , 
+abastecimentos.quantidade,
+abastecimentos.valor_unit,
+concat( 'R$ ' , abastecimentos.valorcompra) as valorcompra,
+(select max(l1.km_abast) from abastecimentos l1 
+ where IF(l1.data_abast=abastecimentos.data_abast, l1.idveiculo=abastecimentos.idveiculo and l1.data_abast=abastecimentos.data_abast and l1.hora_abast<abastecimentos.hora_abast, l1.idveiculo=abastecimentos.idveiculo and l1.data_abast<abastecimentos.data_abast)) AS km_anterior,
+abastecimentos.km_abast, 
+ (select (abastecimentos.km_abast - km_anterior)) AS km_perc,
+ (select (km_perc / abastecimentos.quantidade)) AS kmporlitro,
+ (select (abastecimentos.valorcompra / km_perc)) AS reaisporkm,
+ (select (abastecimentos.quantidade / km_perc)) AS litrosporkm, 
+ fornecedores.razao_social, fornecedores.bairro,fornecedores.cidade, fornecedores.estado from abastecimentos INNER JOIN veiculos ON veiculos.idveiculo=abastecimentos.idveiculo INNER JOIN fornecedores on abastecimentos.idfornecedor=fornecedores.idfornecedor ORDER BY  abastecimentos.data_abast ASC;
+
+BALANÇO DE TODAS AS CONTAS POR MÊS/ANO
+
+SELECT lc_movimento.idconta, lc_contass.conta, DATE_FORMAT(datamov,'%m') AS mes, 
+DATE_FORMAT(datamov,'%Y') AS ano,
+(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE DATE_FORMAT(lc_movimento.datamov,'%Y') > DATE_FORMAT(L2.datamov,'%Y%m') and L2.idconta = lc_movimento.idconta) AS saldo_ano_ant,
+(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE DATE_FORMAT(lc_movimento.datamov,'%Y%m') > DATE_FORMAT(L2.datamov,'%Y%m') and L2.idconta = lc_movimento.idconta) AS saldo_anterior_mes, 
+SUM(IF(lc_movimento.tipo = 1, valor, 0)) AS credito_mes, 
+SUM(IF(lc_movimento.tipo = 0, -1*valor, 0)) AS debito_mes,
+(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE DATE_FORMAT(lc_movimento.datamov,'%Y%m') >=DATE_FORMAT(L2.datamov,'%Y%m') and L2.idconta = lc_movimento.idconta) AS saldo_atual_mes,
+(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE DATE_FORMAT(lc_movimento.datamov,'%Y%m') = DATE_FORMAT(L2.datamov,'%Y%m') and L2.idconta = lc_movimento.idconta) AS bal_mes,
+(SELECT SUM(valor) FROM lc_movimento AS L3 WHERE tipo=1 and year(lc_movimento.datamov) = year(L3.datamov) and month(lc_movimento.datamov) >=month(L3.datamov) and L3.idconta = lc_movimento.idconta) AS credito_acum_ano,
+(SELECT SUM(valor)*-1 FROM lc_movimento AS L3 WHERE tipo=0 and year(lc_movimento.datamov) = year(L3.datamov) and month(lc_movimento.datamov) >=month(L3.datamov) and L3.idconta = lc_movimento.idconta) AS debito_acum_ano,
+(SELECT credito_acum_ano) + (SELECT debito_acum_ano) as bal_acum,
+(SELECT saldo_ano_ant) + (SELECT credito_acum_ano) + (SELECT debito_acum_ano) as saldo_acum_ano FROM lc_movimento
+INNER JOIN lc_contass ON lc_movimento.idconta=lc_contass.idconta WHERE mes=12 and ano=2016 GROUP BY lc_movimento.idconta, mes, ano ORDER BY ano, mes;

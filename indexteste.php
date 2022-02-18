@@ -1,8 +1,7 @@
 <?php
 error_reporting(E_ERROR | E_WARNING);
 	
-	//include "config/config_session.php";
-	include "config/session.php";
+	include "config/config_session.php";
 	include "parameters.php";
 	//include "consultas.php" ok;
 ?>
@@ -149,7 +148,7 @@ function mascara_cpf(cpf)
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 					  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					  <span class="glyphicon glyphicon-user"></span>&nbsp;Usu&aacute;rio: <?php echo $user_id . "-" . $user_email; ?>&nbsp;<span class="caret"></span></a>
+					  <span class="glyphicon glyphicon-user"></span>&nbsp;Usu&aacute;rio: <?php echo $userRow['user_name']; ?>&nbsp;<span class="caret"></span></a>
 						  <ul class="dropdown-menu">
 							<li><a href="profile_user.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Dados do Usuario</a></li>
 							<li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Alterar Usuario</a></li>

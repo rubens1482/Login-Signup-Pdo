@@ -397,7 +397,7 @@ $mostrar = new MOVS;
 							<span><strong> filtrar por Id / descrição: </strong></span><input type="text" name="busca" class="form-control input-sm" style="width:180px;" value="">
 							<span><strong> Data inicial: </strong></span><input type="text" name="data_i" id="data_i" class="form-control input-sm"  style="width:110px;" value="" >
 							<span><strong> Data final: </strong></span><input type="text" name="data_f" id="data_f" class="form-control input-sm"  style="width:110px;" value="">
-							<span><strong><label> Categoria: </label></strong></span>
+							
 							<input type="hidden" name="data_hoje" value="<?php echo $dia_hoje . "-" . mostraMes($mes_hoje) ."-" . $ano_hoje ?>">
 							<!-- este botão foi adicionado para abrir o form modal do relatorio por data -->
 							<button type="button" class="btn btn-sm btn-success" name="modal_date" data-toggle="modal" data-target="#modal_date">
@@ -522,7 +522,7 @@ $mostrar = new MOVS;
 								</td>
 								<td style=" text-align: center; color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><strong style="font-size:12px;"><?php echo InvertData($row['datamov']); ?></strong></td>
 								<td style=" text-align: left; color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><strong style="font-size:12px;"><?php echo $row['descricao']; ?></strong></td>
-								<td style=" text-align: left; color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><strong style="font-size:12px;"><?php echo $row['cat']; ?> - <a style="color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>" href="?mes=<?php echo $mes_hoje?>&ano=<?php echo $ano_hoje?>&filtro_cat=<?php echo $cat?>"><strong style="font-size:12px;"><?php echo $categoria?></a></td>
+								<td style=" text-align: left; color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><strong style="font-size:12px;"><?php echo $row['cat']; ?> - <a style="color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>" href="?mes=<?php echo $mes_hoje?>&ano=<?php echo $ano_hoje?>&filtro_cat=<?php echo $categoria?>"><strong style="font-size:12px;"><?php echo $categoria?></a></td>
 								<td style=" text-align: center; color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><strong style="font-size:12px;"><?php echo $row['idlivro']; ?>-<?php echo $row['folha']; ?></strong></td>
 								<td style=" text-align: center;">
 									<p style="color:<?php if ($row['tipo']==0) echo "#C00"; else echo "#0000FF"?>"><?php if ($row['tipo']==1) echo "+" ; else echo ""?><strong style="font-size:12px;"><?php if ($row['tipo']==1) echo formata_dinheiro($row['valor']); else echo "";?></strong></p>
@@ -614,7 +614,7 @@ $mostrar = new MOVS;
 					<span id="msg-error"></span>
 					<div class="panel panel-primary">
 						<div class="panel-body">
-							<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php" onsubmit="return valida_form(this)">
+							<form class="form-inline" name="form_filtro_cat" method="POST" action="rel_cx_periodo.php" id="modal_date" onsubmit="return valida_form_modal(this)">
 								
 								<div class="controls">
 									<label class="control-label" for="inputName">Data Inicial:</label>
@@ -637,6 +637,18 @@ $mostrar = new MOVS;
 			</div>
 		</div>
 	</div>	
+	
+	<!-- 	SCRIPT JAVASCRIPT IMPEDIR EXECUÇÃO DO FORM MODAL SEM O PREENCHIMENTO DOS CAMPOS DATA INICIAL E FINAL -->
+	<script >
+	$(function(){
+		$("modal_date").submit(function(e){
+			e.preventDerault();
+			alert("interceptado");
+		});
+	});	
+	</script>
+	
+	
 	<!-- /.modal -->	
 <?php include "operations/add_mov.php" ?>
 <?php include "modal_pdf.php" ?>

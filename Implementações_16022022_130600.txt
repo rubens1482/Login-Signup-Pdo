@@ -1,0 +1,9 @@
+=> Criar uma tela php para o codigo principal Html
+=> criar uma tela php para o codigo do navbar
+=> criar uma form logo após o form de filtrar por mês/ano para chamar um form modal para filtrar por Livro/Folha
+=> criar um form logo após o form de filtrar por Livro/Folha para filtrar por intervalo de data. 
+=> nestes casos, deverá ser retirado o caracter coringa de filtrar por descrição
+=> cada relatorio de caixa deverá ser chamado por ser determinado formulario: 
+	=>Filtrar por mês exibe o RELATORIO DE CAIXA MÊS/ANO
+	=> Filtrar por Livro/Folha exibe o "REF.: LIVRO 1 / FOLHA 1 a 1"
+	=> Filtrar por Intervalo de data exibe o "RELATORIO DE CAIXA: De 01-02-2021 a 28-02-2021".

@@ -12,7 +12,7 @@ class MOVS
 		$db = $database->dbConnection();
 		$this->conn = $db;
     }
-	//	FUNÇÃO DE CONSULTA	
+//	FUNÇÃO DE CONSULTA		
 	public function Lquery($sql)
 	{
 		$stmt = $this->conn->prepare($sql);
@@ -149,7 +149,7 @@ class MOVS
 		{
 			echo $e->getMessage();
 		}
-	}
+	}	
 	/*
 	/ FUNÇÃO: deletar movimento de caixa	
 	/ PAGINAS: index.php, filtrarpordata.php e filtrarporfolha.php através do modal "operations/add_mov.php" no botão "Apagar" ("btn_del_mov") direcionando para a pagina 
@@ -181,7 +181,7 @@ class MOVS
 			echo $e->getMessage();
 		}
 	}	
-	//	FUNÇÃO LIVRO ATUAL DE LANÇAMENTO	
+//	FUNÇÃO LIVRO ATUAL DE LANÇAMENTO	
 	public function lc_livro($account)
 	{
 		try
@@ -253,7 +253,7 @@ class MOVS
 	public function redirect($url)
 	{
 		header("Location: $url");
-	}
+	}	
 	/*
 	/ FUNÇÃO: Utilizado no "BALANÇO DE MOVIMENTO - BALANÇO MENSAL" e "BALANÇO DE MOVIMENTO - BALANÇO ANUAL" quando a opção selecionada for ano/mes 
 	/ PAGINAS: index.php filtrarpordata.php e filtrarporfolha.php
@@ -278,7 +278,7 @@ class MOVS
 		{
 			echo $e->getMessage();
 		}
-	}
+	}	
 	/*
 	/ FUNÇÃO: Utilizado no "BALANÇO DE MOVIMENTO - BALANÇO MENSAL" e "BALANÇO DE MOVIMENTO - BALANÇO ANUAL" quando a opção selecionada for ano/mes 
 	/ PAGINAS: index.php filtrarpordata.php e filtrarporfolha.php
@@ -313,11 +313,12 @@ class MOVS
 	{
 		try
 		{
-			$stmt = $this->conn->prepare("SELECT *, 
-			(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE IF(L2.datamov < lc_movimento.datamov, L2.datamov < lc_movimento.datamov and L2.idconta = lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movimento.idconta and L2.id < lc_movimento.id)) AS saldo_anterior,
-			(SELECT IF(lc_movimento.tipo=1, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.id = lc_movimento.id and L2.idconta=lc_movimento.idconta and L2.datamov = lc_movimento.datamov) as credito,
-			(SELECT IF(lc_movimento.tipo=0, SUM(-1*(valor)), 0 ) FROM lc_movimento as L2 WHERE L2.datamov = lc_movimento.datamov and L2.idconta=lc_movimento.idconta and L2.id = lc_movimento.id) as debito, 			
-			(IF((SELECT Saldo_anterior) IS NULL, 0, (SELECT Saldo_anterior) ) + (SELECT credito) + (SELECT debito)) as saldo_atual FROM lc_movimento WHERE idconta=:contapd and month(datamov)=:mes_hoje and year(datamov)=:ano_hoje ORDER BY datamov ASC;");
+			$stmt = $this->conn->prepare("SELECT *,(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE IF(L2.datamov < lc_movimento.datamov, L2.datamov < lc_movimento.datamov and L2.idconta = lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movimento.idconta and L2.id < lc_movimento.id)) AS saldo_anterior,(SELECT IF( lc_movimento.tipo=1, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.id = lc_movimento.id and L2.idconta=lc_movimento.idconta and L2.datamov = lc_movimento.datamov) as credito, (SELECT IF( lc_movimento.tipo=0, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.datamov = lc_movimento.datamov and L2.idconta=lc_movimento.idconta and L2.id = lc_movimento.id) as debito, (IF((SELECT Saldo_anterior) IS NULL, 0, (SELECT Saldo_anterior) ) + (SELECT credito) - (SELECT debito)) as saldo_atual FROM lc_movimento WHERE idconta=:contapd and month(datamov)=:mes_hoje and year(datamov)=:ano_hoje ORDER BY datamov ASC");
+			/*
+			$stmt = $this->conn->prepare("SELECT *, lc_cat.nome,
+(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE IF(L2.datamov < lc_movimento.datamov, L2.datamov < lc_movimento.datamov and L2.idconta = lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movimento.idconta and L2.id < lc_movimento.id)) AS saldo_anterior,
+(SELECT IF( lc_movimento.tipo=1, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.id = lc_movimento.id and L2.idconta=lc_movimento.idconta and L2.datamov = lc_movimento.datamov) as credito, (SELECT IF( lc_movimento.tipo=0, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.datamov = lc_movimento.datamov and L2.idconta=lc_movimento.idconta and L2.id = lc_movimento.id) as debito, (IF((SELECT Saldo_anterior) IS NULL, 0, (SELECT Saldo_anterior) ) + (SELECT credito) - (SELECT debito)) as saldo_atual FROM lc_movimento INNER JOIN lc_cat ON lc_movimento.cat=lc_cat.id WHERE idconta=:contapd and month(datamov)=:mes_hoje and year(datamov)=:ano_hoje ORDER BY datamov ASC");	
+			*/
 			$stmt->bindParam(":contapd", $idconta, PDO::PARAM_INT);
 			$stmt->bindParam(":mes_hoje", $mes_hoje, PDO::PARAM_INT);
 			$stmt->bindParam(":ano_hoje", $ano_hoje, PDO::PARAM_INT);
@@ -384,7 +385,7 @@ class MOVS
 		{
 			echo $e->getMessage();
 		}
-	}
+	}	
 	/*
 	/ FUNÇÃO: RETORNAR O BALANÇO DE MOVIMENTO POR FOLHA E LIVRO
 	/ PAGINAS: http://localhost/filtrarporfolhateste.php
@@ -395,9 +396,9 @@ class MOVS
 	{
 		try
 		{
-			$stmt = $this->conn->prepare("SELECT *, (SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE IF(L2.datamov < lc_movimento.datamov, L2.datamov < lc_movimento.datamov and L2.idconta = lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movimento.idconta and L2.id < lc_movimento.id)) AS saldo_anterior,(SELECT IF( lc_movimento.tipo=1, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.id = lc_movimento.id and idconta=1 and L2.datamov = lc_movimento.datamov) as credito, (SELECT IF( lc_movimento.tipo=0, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.datamov = lc_movimento.datamov and idconta=1 and L2.id = lc_movimento.id) as debito, ((SELECT Saldo_anterior) + (SELECT credito) - (SELECT debito)) as saldo_atual FROM lc_movimento WHERE idconta=:contapd and descricao LIKE :busca and idlivro=:idlivro and folha>=:folha_i and folha<=:folha_f ORDER by datamov;");
+			$stmt = $this->conn->prepare("SELECT *,(SELECT SUM(IF(tipo = 1, valor, -1*valor)) FROM lc_movimento AS L2 WHERE IF(L2.datamov < lc_movimento.datamov, L2.datamov < lc_movimento.datamov and L2.idconta = lc_movimento.idconta, L2.datamov = lc_movimento.datamov and L2.idconta = lc_movimento.idconta and L2.id < lc_movimento.id)) AS saldo_anterior,(SELECT IF( lc_movimento.tipo=1, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.id = lc_movimento.id and L2.idconta=lc_movimento.idconta and L2.datamov = lc_movimento.datamov) as credito, (SELECT IF( lc_movimento.tipo=0, SUM(valor), 0 ) FROM lc_movimento as L2 WHERE L2.datamov = lc_movimento.datamov and L2.idconta=lc_movimento.idconta and L2.id = lc_movimento.id) as debito, ((SELECT Saldo_anterior) + (SELECT credito) - (SELECT debito)) as saldo_atual FROM lc_movimento WHERE idconta=:idconta and descricao LIKE :busca and idlivro=:idlivro and folha>=:folha_i and folha<=:folha_f ORDER by datamov;");
 			
-			$stmt->bindParam(":contapd", $idconta, PDO::PARAM_INT);
+			$stmt->bindParam(":idconta", $idconta, PDO::PARAM_INT);
 			$stmt->bindvalue(':busca', '%'.$busca.'%', PDO::PARAM_STR);
 			$stmt->bindParam(":idlivro", $livro, PDO::PARAM_INT);
 			$stmt->bindParam(":folha_i", $folha_i, PDO::PARAM_INT);
@@ -412,6 +413,7 @@ class MOVS
 		{
 			echo $e->getMessage();
 		}
-	}	
+	}
+	
 }
 ?>

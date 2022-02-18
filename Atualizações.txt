@@ -11,13 +11,13 @@ Contas:
 ? Alteração da senha da Conta: em aberto.
 
 Movimentos:
-? Formulàrio Modal para inserção de movimentos: ok;
-? inserção de movimentos função: ok;
-? Atualização de movimentos: ok;
+? Formulàrio Modal para inserção de movimentos: foi inplementado.
+? inserção de movimentos função: foi inplementado.
+? Atualização de movimentos: foi inplementado.
 ? Inserção do campo "Livro" na tabela movimentos: foi inplementado.
 ? Alteração do modal de inserção do campo "Livro" nas telas de inserção e alteração de movimentos: Implementado.
-? Deleção de Movimentos: ok;
-? Exportação para pdf dos movimentos do mês/ano: falta consertar os detalhes.
+? Deleção de Movimentos: foi inplementado.
+? Exportação para pdf dos movimentos do mês/ano: foi inplementado. 13/11/2021.
 ? Exportação para pdf dos movimentos por data: falta consertar os detalhes.
 ? Exportação para pdf dos movimentos por folha e livro: ainda não existe.
 ? 
@@ -25,3 +25,12 @@ Movimentos:
 Painel de Usuários:
 Melhoramento do painel de usuarios, tela "profile".
 Alteração de senha. Ainda não existe.
+=======================================================================================================================
+13/11/2021
+=> ? Exportação para pdf dos movimentos por data: falta consertar os detalhes.
+=> ? Exportação para pdf dos movimentos por folha e livro: ainda não existe.
+=> ? criação do balanço de categorias por mês/ano.
+=> ? criação do balanço de categorias por intervalod de data.
+=> ? criação do balanço de categorias por livro/folha.
+=> ? criação do formulario para "Esqueci minha senha?" com indicação dos campos "cpf" e "data de nascimento".
+

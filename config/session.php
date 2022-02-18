@@ -11,6 +11,11 @@
 	{
 		// session no set redirects to login page
 		$session->redirect('login.php');
+	} else {
+		$userRow = $session->dologin($_SESSION['user_session'],$_SESSION['user_mail'],$_SESSION['user_pass']);
+		$user_id = $_SESSION['user_session'];
+		$user_email = $_SESSION['user_mail'];
+		$user_name = $_SESSION['user_name'];
 	}
 	
 	require_once 'class/class.account.php';
@@ -23,6 +28,8 @@
 	{
 		// session no set redirects to login page
 		$session->redirect('login_c.php');
+	} else {
+
 	}
 	
 	require_once 'class/class.lancamentos.php';
